@@ -40,7 +40,7 @@ const Navigator = () => {
 
           <div className="link-container">
             <NavLink
-              to="/categories"
+              to="categories"
               className="btn btn-outline-secondary me-2"
             >
               Categories
