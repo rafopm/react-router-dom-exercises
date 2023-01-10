@@ -1,6 +1,4 @@
-import { Fragment } from "react";
 import {
-  Link,
   NavLink,
   Route,
   useResolvedPath,
@@ -8,33 +6,37 @@ import {
   Navigate,
 } from "react-router-dom";
 import ActionPage from "../pages/categories/ActionPage";
+import AnimePage from "../pages/categories/AnimePage";
+import GorePage from "../pages/categories/terror/GorePage";
+import SuspensePage from "../pages/categories/terror/SuspensePage";
+import TerrorPage from "../pages/categories/TerrorPage";
 import CategoriesPage from "../pages/CategoriesPage";
 import PrivateRoute from "./PrivateRoute";
 
 export default function CategoriesRouter() {
   const url = useResolvedPath("").pathname
-  console.log(url)
+  // console.log(url)
   return (
     <div>
       <nav>
         <ul>
           <li>
-            <Link to={`${url}`} >
+            <NavLink exact to={`${url}`} className="btn btn-outline-success me-1">
               All
-            </Link>
+            </NavLink>
           </li>
-          {/* <li>
-            <NavLink to={`${url}/terror`} >
+          <li>
+            <NavLink to={`${url}/terror`} className="btn btn-outline-success me-2">
               Terror
             </NavLink>
-          </li> */}
-          <li>
-            <Link to={`${url}/action`} >
-              Action
-            </Link>
           </li>
           <li>
-            <NavLink to={`${url}/anime`} >
+            <NavLink to={`${url}/action`} className="btn btn-outline-success me-2">
+              Action
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to={`${url}/anime`} className="btn btn-outline-success me-2">
               Anime
             </NavLink>
           </li>
@@ -43,19 +45,11 @@ export default function CategoriesRouter() {
       <>
         <Routes>
           <Route path="/" element={<CategoriesPage />} />
-          {/* <Route
-          path="/categories/terror/*"
-          element={<PrivateRoute component={TerrorRouter} />}
-        /> */}
-
-          <Route exact path="/categories/action" element={<CategoriesPage />} />
-          {/* <h1>Category Action</h1> */}
-          <Route exact path="/categories/anime">
-            {/* <h1>Category Anime</h1> */}
-          </Route>
-
+          <Route exact path="terror/*" element={<PrivateRoute component={TerrorRouter} />} />
+          <Route exact path="/action" element={<ActionPage />} />
+          <Route exact path="/anime" element={<AnimePage />} />
           <Route
-            path="/categories/*"
+            path="/*"
             element={<Navigate to="/404" replace />}
           />
         </Routes>
@@ -66,31 +60,29 @@ export default function CategoriesRouter() {
 
 function TerrorRouter() {
   const urlTerror = useResolvedPath("").pathname;
-  console.log(urlTerror);
+  //console.log(urlTerror);
   return (
     <div>
       <ul>
         <li>
-          <Link to="/categories/terror">All</Link>
+          <NavLink exact to={`${urlTerror}`} className="btn btn-outline-success me-1">All</NavLink>
         </li>
         <li>
-          <Link to="/categories/terror/gore">Gore</Link>
+          <NavLink to={`${urlTerror}/gore`} className="btn btn-outline-success me-1">Gore</NavLink>
         </li>
         <li>
-          <Link to="/categories/terror/suspense">Suspense</Link>
+          <NavLink to={`${urlTerror}/suspense`} className="btn btn-outline-success me-1">Suspense</NavLink>
         </li>
       </ul>
+
       <Routes>
-        <Route exact path={`${urlTerror}`}>
-          <h3>Category Terror</h3>
-        </Route>
-        <Route exact path={`${urlTerror}/gore`}>
-          <h3>Gore</h3>
-        </Route>
-        <Route exact path={`${urlTerror}/suspense`}>
-          <h3>Suspense</h3>
-        </Route>
-        <Route path="*" element={<Navigate to="/404" replace />} />
+        <Route exact path="/"  element={<TerrorPage />} />
+        <Route exact path="/gore" element={<GorePage />} />
+        <Route exact path="/suspense" element={<SuspensePage />} />
+        <Route
+            path="/*"
+            element={<Navigate to="/404" replace />}
+          />
       </Routes>
     </div>
   );

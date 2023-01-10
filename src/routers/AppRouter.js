@@ -5,7 +5,6 @@ import NotFoundPage from "../pages/NotFoundPage";
 import NavBar from "./NavBar";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import ProfilePage from "../pages/ProfilePage";
-import CategoriesPage from "../pages/CategoriesPage";
 import "../styles/navBar.css";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
@@ -27,7 +26,6 @@ function AppRouter() {
         <Route path="*" element={<NotFoundPage />} />
         <Route exact path="/profile/:username" element={<ProfilePage />} />
 
-
         <Route
           exact
           path="/login"
@@ -38,8 +36,7 @@ function AppRouter() {
           path="/register"
           element={<PublicRoute component={RegisterPage} />}
         />
-        {/* element={<PrivateRoute component={Page1} />} */}
-        {/* <Route path="/user" element={<Private Component={User} />} /> */}
+
         <Route
           exact
           path="/dashboard"
@@ -50,11 +47,7 @@ function AppRouter() {
           path="/payments"
           element={<PrivateRoute component={PaymentsPage} />}
         />
-
         <Route path="/404" element={<NotFoundPage />} />
-        {/* <Route path="*">
-          <Navigate to="/404" />
-        </Route> */}
         <Route path="*" element={<Navigate to="/404" replace />} />
       </Routes>
     </BrowserRouter>
